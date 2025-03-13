@@ -8,20 +8,7 @@ import { Service_Photo } from 'src/app/services/photo.service';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-
-
-// "description": "A beautiful landscape photo",
-// "upload_datetime": "2025-03-08T09:37:41.775Z",
-// "_id": "16c3645f-0d1f-41b0-8545-07c87f691b0d",
-// "file_urt": "uploads/987a06e5-9d88-4ba4-8f81-d7e37ba658f0.jpeg"
-interface photo_model {
-  description?: string;
-  upload_datetime?: string;
-  _id?: string;
-  file_urt?: string;
-  classType?: string;
-  tags?:string;
-}
+import { photo_model } from '../../models/photo.model';
 
 @Component({
   selector: 'app-blog-card',
@@ -30,28 +17,27 @@ interface photo_model {
   templateUrl: './blog-card.component.html',
 })
 export class AppBlogCardsComponent implements AfterViewInit {
+  // 照片的分類類型
   public arrClassType: string[] = [];
+  // 照片的內容
   public arrPhotos: photo_model[] = [];
+  // 注入 Service_Photo 服務
   constructor(private service_photo:Service_Photo) {}
+
   ngAfterViewInit() {
+    // 獲取所有的分類類型
     this.service_photo.getAll_classType().subscribe((data) => {
       this.arrClassType = data as string[];
     });
-    console.log('canred1');
-    
+
+    // 獲取所有照片，並更新照片的 URL
+    // class one 是分類類型
+    // all 是標籤 ， 如果是 all 就是全部
     this.service_photo.getPhotos('class one','all').subscribe((data) => {
-      
       this.arrPhotos = data as photo_model[];
       this.arrPhotos.forEach((photo) => {
         photo.file_urt = APP_CONFIG.API_WEB_ROOT + '/' + photo.file_urt;
       });
-      console.log(this.arrPhotos);
     });
-
-    
-
-    
   }
-
-  
 }
