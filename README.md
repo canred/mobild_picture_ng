@@ -13,4 +13,8 @@
     - ![image](https://github.com/user-attachments/assets/197d4119-20ea-45c1-85b4-ca093c31fa93)
 
   - 手機APP：  https://github.com/canred/mobile_picture
-    
+
+# 啟動方式（開發階段）
+  - 前端應用：
+  - 後台API：
+  - 手機APP：
