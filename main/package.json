@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postbuild": "xcopy /E /I /Y dist\\materialm\\browser ..\\..\\mobile_picture_api\\dist\\browser"
   },
   "private": true,
   "dependencies": {
