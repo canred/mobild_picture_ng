@@ -1,0 +1,45 @@
+<button mat-button  style=" margin-bottom: 10px; width: 200px; border: solid 1px rgb(127, 126, 239);">
+  <mat-icon>refresh</mat-icon>
+  重新加載
+</button>
+<div class="row justify-content-center">
+  @for(photo of arrPhotos; track photo.file_urt) {
+  <div class="col-lg-3">
+    <mat-card class="cardWithShadow position-relative overflow-hidden">
+      <div class="position-relative">
+        <img
+          mat-card-image
+          src="{{ photo.file_urt }}"
+          alt="Photo of a Shiba Inu"
+          class="w-100"
+        />
+        <div
+          class="card-overlay h-100 d-flex align-items-end justify-content-end"
+        >
+         
+        </div>
+      </div>
+
+      <mat-card-content class="p-y-24">
+        
+        <mat-card-title class="m-t-20 text-hover-primary cursor-pointer">
+          Tags: {{ photo.tags }}
+        </mat-card-title>
+        <mat-card-title class="m-t-2 text-hover-primary cursor-pointer">
+          Desc: {{ photo.description }}
+        </mat-card-title>
+        <div class="d-flex align-items-center justify-content-center m-t-24">
+          <div class="d-flex align-items-center">
+            
+            <span class="f-s-14 d-flex align-items-center"
+              ><i-tabler name="message-2" class="icon-18 m-r-4"></i-tabler
+              >{{ photo.upload_datetime }}</span
+            >
+          </div>
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  }
+</div>
