@@ -66,7 +66,8 @@
 
 # PreView
   - 前端應用
-    - ![image](https://github.com/user-attachments/assets/04ef9eea-24b5-472e-a85a-bf9284ddd0f1)
+    - ![image](https://github.com/user-attachments/assets/9329675a-599c-4559-9b44-27436b6e8eba)
+
 
   - 後台API：  
     - ![image](https://github.com/user-attachments/assets/197d4119-20ea-45c1-85b4-ca093c31fa93)
