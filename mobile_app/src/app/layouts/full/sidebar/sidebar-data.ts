@@ -2,7 +2,7 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: '相簿清單',
+    navCap: 'Menu',
   },
   {
     displayName: '生產環境',
@@ -19,16 +19,13 @@ export const navItems: NavItem[] = [
     iconName: 'solar:atom-line-duotone',
     route: '/dashboard',
   },
+  {
+    displayName: '個人拍照',
+    iconName: 'solar:atom-line-duotone',
+    route: '/dashboard',
+  },
+  
 
-  // {
-  //   displayName: 'Analytics',
-  //   iconName: 'solar:widget-add-line-duotone',
-  //   route: 'https://materialm-angular-main.netlify.app/dashboards/dashboard1',
-  //   chip: true,
-  //   external: true,
-  //   chipClass: 'bg-secondary text-white',
-  //   chipContent: 'PRO',
-  // },
   // {
   //   displayName: 'eCommerce',
   //   iconName: 'solar:chart-line-duotone',
@@ -48,19 +45,34 @@ export const navItems: NavItem[] = [
   //   chipContent: 'PRO',
   // },
 
-  // {
-  //   divider: true,
-  //   navCap: 'Apps',
-  // },
-  // {
-  //   displayName: 'Chat',
-  //   iconName: 'solar:chat-round-line-line-duotone',
-  //   route: 'https://materialm-angular-main.netlify.app/apps/chat',
-  //   chip: true,
-  //   external: true,
-  //   chipClass: 'bg-secondary text-white',
-  //   chipContent: 'PRO',
-  // },
+  {
+    divider: true,
+    navCap: '系統管理',
+  },
+  {
+    displayName: '使用者管理',
+    iconName: 'solar:atom-line-duotone',
+    route: '/dashboard',
+  },
+  {
+    displayName: '相簿管理',
+    iconName: 'solar:atom-line-duotone',
+    route: '/dashboard',
+  },
+  {
+    divider: true,
+    navCap: 'Mobile APP',
+  },
+  {
+    displayName: 'iOS',
+    iconName: 'solar:atom-line-duotone',
+    route: '/dashboard',
+  },
+  {
+    displayName: 'Android',
+    iconName: 'solar:atom-line-duotone',
+    route: '/dashboard',
+  },
   // {
   //   displayName: 'Calendar',
   //   iconName: 'solar:calendar-mark-line-duotone',

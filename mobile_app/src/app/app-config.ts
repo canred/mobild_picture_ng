@@ -9,6 +9,7 @@ console.log('ENV:', ENV);
 interface Config {
   BASE_URL: string;
   SYSTEM_VERSION: string;
+  title_name: string;
 }
 
 // 定義 CONFIG 常數，包含開發和生產環境的設定
@@ -17,11 +18,13 @@ const CONFIG: { [key in 'development' | 'production']: Config } = {
     // development 環境設定
     BASE_URL: 'http://localhost:3001',
     SYSTEM_VERSION: '1.0.0',
+    title_name: 'Canred相簿'
   },
   production: {
     // production 環境設定
     BASE_URL: 'http://localhost:3002',
     SYSTEM_VERSION: '1.0.0',
+    title_name: 'Canred相簿'
   }
 };
 
@@ -34,5 +37,6 @@ export const APP_CONFIG = {
   API_ROOT: `${CURRENT_CONFIG.BASE_URL}/api`,
   API_WEB_ROOT: CURRENT_CONFIG.BASE_URL,
   BROWSER_TARGET: environment.browserTarget,
-  APP_NAME: 'Mobile Picture App'
+  APP_NAME: 'Mobile Picture App',
+  title_name: CURRENT_CONFIG.title_name
 };
