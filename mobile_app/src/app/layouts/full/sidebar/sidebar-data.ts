@@ -40,7 +40,7 @@ export const navItems: NavItem[] = [
   {
     displayName: '相簿管理',
     iconName: 'solar:atom-line-duotone',
-    route: '/dashboard',
+    route: '/PhotoMamagement/admin',
   },
   {
     divider: true,

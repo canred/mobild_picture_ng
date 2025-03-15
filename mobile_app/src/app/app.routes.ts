@@ -34,6 +34,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/user-manmagement/user-mamagement.routes').then((m) => m.UserMamagementRoutes),
       },
+      {
+        path: 'PhotoMamagement',
+        loadChildren: () =>
+          import('./pages/photo-manmagement/photo-manmagement.routes').then((m) => m.PhotoMamagementRoutes),
+      },
 
     ],
   },

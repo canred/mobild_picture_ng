@@ -1,0 +1,87 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <!-- <mat-card-title>Table</mat-card-title> -->
+    <div class="search-container d-flex align-items-center">
+      <mat-form-field appearance="outline" class="flex-grow-1">
+        <mat-label>關鍵字查詢</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="輸入關鍵字">
+      </mat-form-field >
+      <button mat-flat-button color="primary" class="p-y-0" style="margin-top:-20px;"  (click)="openDialog()">
+        新增使用者
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource1" class="w-100">
+        <!-- Position Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14 p-l-0">
+            User Name
+          </th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <!-- <img [src]="element.imagePath" alt="users" width="60" class="rounded" /> -->
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.username }}
+                </h6>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            EMail
+          </th>
+          <td mat-cell *matCellDef="let element">
+
+            <span class=" rounded f-w-600 p-6 p-y-4 f-s-12">
+              {{ element.email }}
+            </span>
+
+          </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            上次修改時間
+          </th>
+          <td mat-cell *matCellDef="let element">
+
+            <span class=" rounded f-w-600 p-6 p-y-4 f-s-12">
+              {{ element.updatedAt }}
+            </span>
+
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="動作">
+              <mat-icon style="color: blue;">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" style="border: 1px solid black;">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>編輯</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>刪除</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
