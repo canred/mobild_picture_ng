@@ -108,23 +108,6 @@ export const navItems: NavItem[] = [
     route: '/extra/sample-page',
   },
 
-  {
-    divider: true,
-    navCap: 'Forms',
-  },
-
-
-  {
-    divider: true,
-    navCap: 'Tables',
-  },
-
-
-  {
-    divider: true,
-    navCap: 'Chart',
-  },
-
 
   {
     divider: true,
