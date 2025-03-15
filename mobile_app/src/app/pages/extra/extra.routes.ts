@@ -16,7 +16,7 @@ export const ExtraRoutes: Routes = [
       {
         path: 'sample-page',
         component: AppSamplePageComponent,
-      },
+      }
     ],
   },
 ];

@@ -28,7 +28,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "src/assets/scss/style.css"
             ],
             "scripts": [],
             "browser": "src/main.ts"

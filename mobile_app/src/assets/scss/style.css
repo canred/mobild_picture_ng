@@ -1,0 +1,9 @@
+.custom-tab-group .mat-tab-label {
+  background-color: #e0f7fa; /* 淡藍色背景 */
+  border: 1px solid #b0bec5; /* 邊框 */
+  border-radius: 4px;
+  margin-right: 4px;
+}
+.custom-tab-group .mat-tab-label-active {
+  background-color: #b2ebf2; /* 活動標籤的背景色 */
+}

@@ -29,6 +29,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
       },
+      {
+        path: 'UserMamagement',
+        loadChildren: () =>
+          import('./pages/user-manmagement/user-mamagement.routes').then((m) => m.UserMamagementRoutes),
+      },
+
     ],
   },
   {

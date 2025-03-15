@@ -24,9 +24,9 @@ export const navItems: NavItem[] = [
     iconName: 'solar:atom-line-duotone',
     route: '/dashboard',
   },
-  
 
-  
+
+
 
   {
     divider: true,
@@ -35,7 +35,7 @@ export const navItems: NavItem[] = [
   {
     displayName: '使用者管理',
     iconName: 'solar:atom-line-duotone',
-    route: '/dashboard',
+    route: '/UserMamagement/admin',
   },
   {
     displayName: '相簿管理',
@@ -95,8 +95,8 @@ export const navItems: NavItem[] = [
     iconName: 'solar:tablet-line-duotone',
     route: '/ui-components/tables',
   },
-  
-  
+
+
   {
     displayName: 'Icons',
     iconName: 'solar:sticker-smile-circle-2-line-duotone',
@@ -112,19 +112,19 @@ export const navItems: NavItem[] = [
     divider: true,
     navCap: 'Forms',
   },
-  
+
 
   {
     divider: true,
     navCap: 'Tables',
   },
-  
+
 
   {
     divider: true,
     navCap: 'Chart',
   },
- 
+
 
   {
     divider: true,
@@ -154,11 +154,11 @@ export const navItems: NavItem[] = [
         iconName: 'solar:round-alt-arrow-right-line-duotone',
         route: '/authentication/register',
       },
-      
+
     ],
   },
-  
- 
-  
-  
+
+
+
+
 ];
