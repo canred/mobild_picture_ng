@@ -15,11 +15,10 @@ export class AppUserMamagementComponent implements AfterViewInit {
   constructor(private service_user: Service_User) {
 
   }
-
+  goBack() {
+    window.history.back();
+  }
    async ngAfterViewInit(): Promise<void> {
-    let drs = await  this.service_user.get_user_by_keyword('');
-    debugger;
-    console.log(drs);
 
   }
 }

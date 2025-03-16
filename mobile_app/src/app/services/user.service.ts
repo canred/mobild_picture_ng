@@ -46,7 +46,6 @@ export class Service_User {
     }
     let api_root = APP_CONFIG.API_ROOT + '/user/keyword/' + keyword;
     const drs = await this.http.get<Array<User_Model>>(api_root).toPromise();
-    debugger;
     return drs;
   }
 

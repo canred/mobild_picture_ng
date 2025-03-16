@@ -67,10 +67,10 @@
               <mat-icon style="color: blue;">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" style="border: 1px solid black;">
-              <button mat-menu-item>
+              <a mat-menu-item href="./UserMamagement/edit?_id={{element._id}}" >
                 <mat-icon>edit</mat-icon>
                 <span>編輯</span>
-              </button>
+              </a>
               <button mat-menu-item>
                 <mat-icon>delete</mat-icon>
                 <span>刪除</span>

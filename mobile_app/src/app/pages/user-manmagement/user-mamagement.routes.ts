@@ -1,3 +1,4 @@
+import { AppUserMamagementEditComponent } from './user-manmagement-edit.component';
 import { AppUserMamagementComponent } from './user-manmagement.component';
 import { Routes } from '@angular/router';
 
@@ -9,6 +10,10 @@ export const UserMamagementRoutes: Routes = [
       {
         path: 'admin',
         component: AppUserMamagementComponent,
+      },
+      {
+        path: 'edit',
+        component: AppUserMamagementEditComponent,
       }
     ],
   },
