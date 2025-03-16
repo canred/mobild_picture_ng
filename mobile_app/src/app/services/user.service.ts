@@ -41,10 +41,13 @@ export class Service_User {
    * @returns {Promise<User_Model[]>} 包含用戶數據的Promise對象。
    */
   public async get_user_by_keyword(keyword: string) : Promise<User_Model[] | undefined> {
+    if (keyword == '') {
+      keyword = '{keyword}';
+    }
     let api_root = APP_CONFIG.API_ROOT + '/user/keyword/' + keyword;
-    alert(api_root);
-    const response = await this.http.get<User_Model[]>(api_root).toPromise();
-    return response;
+    const drs = await this.http.get<Array<User_Model>>(api_root).toPromise();
+    debugger;
+    return drs;
   }
 
   /**
