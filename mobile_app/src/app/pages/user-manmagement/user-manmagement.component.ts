@@ -15,10 +15,11 @@ export class AppUserMamagementComponent implements AfterViewInit {
   constructor(private service_user: Service_User) {
 
   }
-  goBack() {
+  public goBack() {
     window.history.back();
   }
-   async ngAfterViewInit(): Promise<void> {
+
+  async ngAfterViewInit(): Promise<void> {
 
   }
 }

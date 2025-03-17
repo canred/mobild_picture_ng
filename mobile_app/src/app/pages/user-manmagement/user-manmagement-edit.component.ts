@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { User_Model } from 'src/app/models/user.model';
 import { Service_User } from 'src/app/services/user.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface Food {
   value: string;
@@ -9,46 +10,45 @@ interface Food {
 }
 @Component({
   selector: 'app-user-manmagement-edit',
-  imports: [MaterialModule],
+  imports: [MaterialModule, ReactiveFormsModule],
   templateUrl: './user-manmagement-edit.html',
 })
 
 export class AppUserMamagementEditComponent implements AfterViewInit {
-  country: Food[] = [
-    { value: 'steak-0', viewValue: 'USA' },
-    { value: 'pizza-1', viewValue: 'India' },
-    { value: 'tacos-2', viewValue: 'France' },
-    { value: 'tacos-3', viewValue: 'UK' },
-  ];
 
-  selectedCountry = this.country[2].value;
-
-  city: Food[] = [
-    { value: 'steak-0', viewValue: 'Mexico' },
-    { value: 'pizza-1', viewValue: 'Mumbai' },
-    { value: 'tacos-2', viewValue: 'Tokyo' },
-    { value: 'tacos-3', viewValue: 'New York' },
-  ];
-
-  selectedCity = this.city[1].value;
-
-  state: Food[] = [
-    { value: 'steak-0', viewValue: 'Cuba' },
-    { value: 'pizza-1', viewValue: 'Djibouti' },
-    { value: 'tacos-2', viewValue: 'Bulgaria' },
-    { value: 'tacos-3', viewValue: 'Cabo Verde' },
-  ];
-
-  selectedState = this.state[3].value;
-  constructor(private service_user: Service_User) {
-
+  public form: FormGroup;
+  constructor(private service_user: Service_User, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', [Validators.email]],
+      createdAt: [''],
+      updatedAt: [''],
+      _id: [''],
+    });
   }
 
+  onSubmit(){
+
+  }
   goBack() {
     window.history.back();
   }
-   async ngAfterViewInit(): Promise<void> {
 
+  public onCancel() {
+
+  }
+  async ngAfterViewInit(): Promise<void> {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('_id');
+    if (userId) {
+      try {
+        const user = await this.service_user.get_user_by_id(userId);
+        this.form.patchValue(user as any);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
   }
 }
 

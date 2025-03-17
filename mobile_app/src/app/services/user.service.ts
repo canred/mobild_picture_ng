@@ -57,7 +57,7 @@ export class Service_User {
    */
   public get_user_by_id(id: string) {
     let api_root = APP_CONFIG.API_ROOT + '/user/' + id;
-    return this.http.get(api_root); // 修正這行
+    return this.http.get<User_Model>(api_root).toPromise(); // 修正這行
   }
 
   /**
