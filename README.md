@@ -70,6 +70,9 @@
       - ![image](https://github.com/user-attachments/assets/9329675a-599c-4559-9b44-27436b6e8eba)
     - 使用者管理
       - ![image](https://github.com/user-attachments/assets/a31f391a-59f6-42ff-83a3-ed81f751de8e)
+      - 人員新增/編輯
+        - ![image](https://github.com/user-attachments/assets/7496b78c-3a50-4146-aea0-2dde8eb7c060)
+        -  
     - Account編輯
       - ![image](https://github.com/user-attachments/assets/cac139ca-baa2-4a51-b6e1-2bdcc12cce18)
 
