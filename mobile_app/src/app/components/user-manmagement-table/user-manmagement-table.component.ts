@@ -36,7 +36,23 @@ export class UserManmagementTableComponent implements AfterViewInit {
   openDialog() {
     alert('Dialog opened');
   }
-  applyFilter(event: Event) {}
+  async applyFilter(event: Event) {
+    //  'http://localhost:3001/api/user/keyword/admin' \\
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.drs = await this.service_user.get_user_by_keyword(filterValue);
+    if(this.drs == undefined){
+      // 表示沒有找到用戶
+      this.drs = [];
+    }else{
+      await this.drs.forEach((user) => {
+        if(user.updatedAt )
+          user.updatedAt = this.datePipe.transform(new Date(user.updatedAt!), 'yyyy-MM-dd HH:mm')!;
+        if(user.createdAt )
+          user.createdAt = this.datePipe.transform(new Date(user.createdAt!), 'yyyy-MM-dd HH:mm')!;
+      });
+      this.dataSource1 = this.drs;
+    }
+  }
 
   async ngAfterViewInit(): Promise<void> {
     this.drs = await this.service_user.get_user_by_keyword('');

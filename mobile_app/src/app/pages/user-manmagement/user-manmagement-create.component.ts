@@ -9,18 +9,18 @@ interface Food {
   viewValue: string;
 }
 @Component({
-  selector: 'app-user-manmagement-edit',
+  selector: 'app-user-manmagement-create',
   imports: [MaterialModule, ReactiveFormsModule],
-  templateUrl: './user-manmagement-edit.html',
+  templateUrl: './user-manmagement-create.html',
 })
 
-export class AppUserMamagementEditComponent implements AfterViewInit {
+export class AppUserMamagementCreateComponent implements AfterViewInit {
 
   public form: FormGroup;
   constructor(private service_user: Service_User, private fb: FormBuilder) {
     this.form = this.fb.group({
       username: ['', Validators.required],
-      password: [''],
+      password: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       createdAt: [''],
       updatedAt: [''],
@@ -42,7 +42,7 @@ export class AppUserMamagementEditComponent implements AfterViewInit {
     }else{
       const user: User_Model = this.form.value;
       debugger;
-      this.service_user.update_user(user).subscribe(
+      this.service_user.create_user(user).subscribe(
         (response) => {
           alert('User registered successfully');
         },
@@ -63,16 +63,16 @@ export class AppUserMamagementEditComponent implements AfterViewInit {
 
   }
   async ngAfterViewInit(): Promise<void> {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('_id');
-    if (userId) {
-      try {
-        const user = await this.service_user.get_user_by_id(userId);
-        this.form.patchValue(user as any);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    }
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const userId = urlParams.get('_id');
+    // if (userId) {
+    //   try {
+    //     const user = await this.service_user.get_user_by_id(userId);
+    //     this.form.patchValue(user as any);
+    //   } catch (error) {
+    //     console.error('Error fetching user data:', error);
+    //   }
+    // }
   }
 }
 

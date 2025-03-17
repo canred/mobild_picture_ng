@@ -67,8 +67,8 @@ export class Service_User {
    * @returns {Observable<any>} 包含服務器響應的可觀察對象。
    */
   public update_user(pUser: User_Model) {
-    let api_root = APP_CONFIG.API_ROOT + '/user/update/';
-    return this.http.post(api_root, pUser); // 修正這行
+    let api_root = APP_CONFIG.API_ROOT + '/user/edit';
+    return this.http.put(api_root, pUser); // 修正這行
   }
 
   /**
@@ -81,4 +81,11 @@ export class Service_User {
     let api_root = APP_CONFIG.API_ROOT + '/user/delete/' + pUser.username;
     return this.http.delete(api_root); // 修正這行
   }
+
+  public create_user(pUser: User_Model) {
+    let api_root = APP_CONFIG.API_ROOT + '/user/register';
+    return this.http.post(api_root, pUser); // 修正這行
+  }
+
+
 }
