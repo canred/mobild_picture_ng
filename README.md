@@ -72,7 +72,8 @@
       - ![image](https://github.com/user-attachments/assets/a31f391a-59f6-42ff-83a3-ed81f751de8e)
       - 人員新增/編輯
         - ![image](https://github.com/user-attachments/assets/7496b78c-3a50-4146-aea0-2dde8eb7c060)
-        -  
+        - ![image](https://github.com/user-attachments/assets/b82aec91-ddc6-47ba-882a-277619c25c26)
+
     - Account編輯
       - ![image](https://github.com/user-attachments/assets/cac139ca-baa2-4a51-b6e1-2bdcc12cce18)
 
