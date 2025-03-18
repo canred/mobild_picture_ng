@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { MaterialModule } from '../../material.module';
-import { User_Model } from 'src/app/models/user.model';
-import { Service_User } from 'src/app/services/user.service';
+import { Album_Model } from 'src/app/models/album.model';
+import { Service_Album } from 'src/app/services/album.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface Food {
@@ -17,20 +17,18 @@ interface Food {
 export class AppphotoMamagementCreateComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_user: Service_User, private fb: FormBuilder) {
+  constructor(private service_album: Service_Album, private fb: FormBuilder) {
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      createdAt: [''],
-      updatedAt: [''],
+      photo_name: ['', Validators.required],
+      photo_desc: [''],
+      photo_order: ['', [ Validators.required]],
+      photo_updateAt: [''],
+      defalut_photo: [''],
       _id: [''],
     });
   }
 
   onSubmit(){
-
-
     if (!this.form.valid) {
       const invalidFields = [];
       for (const control in this.form.controls) {
@@ -40,14 +38,14 @@ export class AppphotoMamagementCreateComponent implements AfterViewInit {
       }
       alert(`Invalid fields: ${invalidFields.join(', ')}`);
     }else{
-      const user: User_Model = this.form.value;
-      debugger;
-      this.service_user.create_user(user).subscribe(
+      const album: Album_Model = this.form.value;
+      this.service_album.create_album(album).subscribe(
         (response) => {
-          alert('User registered successfully');
+          alert('Create Album successfully');
+          this.goBack();
         },
         (error) => {
-          alert('Error registering user');
+          alert('Error in Create Album');
         }
       );
     }

@@ -6,9 +6,9 @@
         <mat-label>關鍵字查詢</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="輸入關鍵字">
       </mat-form-field >
-      <button mat-flat-button color="primary" class="p-y-0" style="margin-top:-20px;"  (click)="openDialog()">
+      <a mat-flat-button color="primary" class="p-y-0" style="margin-top:-20px;"  href="./PhotoMamagement/create">
         新增相簿
-      </button>
+      </a>
     </div>
 
     <div class="table-responsive">
@@ -79,11 +79,11 @@
               <mat-icon style="color: blue;">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" style="border: 1px solid black;">
-              <button mat-menu-item>
+              <a mat-menu-item href="./PhotoMamagement/edit?_id={{element._id}}">
                 <mat-icon>edit</mat-icon>
                 <span>編輯</span>
-              </button>
-              <button mat-menu-item>
+              </a>
+              <button mat-menu-item (click)="deleteAlbum(element._id)">
                 <mat-icon>delete</mat-icon>
                 <span>設定失效</span>
               </button>

@@ -4,51 +4,53 @@
       <button mat-icon-button (click)="goBack()" class="p-t-2">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <div class="m-l-12 m-b-12" style="font-size: x-large;">New Account Setting</div>
+      <div class="m-l-12 m-b-12" style="font-size: x-large;">新相簿設定</div>
 
     </mat-card-title>
     <mat-card-content class="b-t-8">
 
       <form class="p-t-12" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="row m-t-12">
-          <div class="col-lg-6" style="display: none;">
+          <div class="col-lg-12" style="display: none;">
             <mat-label class="f-w-600 m-b-8 d-block">ID</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput placeholder="_id" formControlName="_id" />
             </mat-form-field>
           </div>
 
-          <div class="col-lg-6">
-            <mat-label class="f-w-600 m-b-8 d-block">帳號名稱</mat-label>
+          <div class="col-lg-12">
+            <mat-label class="f-w-600 m-b-8 d-block">相簿名稱</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput placeholder="User Name(必填)" formControlName="username"  />
+              <input matInput placeholder="相簿名稱(必填)" formControlName="photo_name"  />
             </mat-form-field>
           </div>
-          <div class="col-lg-6">
-            <mat-label class="f-w-600 m-b-8 d-block">Email</mat-label>
+          <div class="col-lg-12">
+            <mat-label class="f-w-600 m-b-8 d-block">說明</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput placeholder="Email(必填)" formControlName="email" />
-            </mat-form-field>
-          </div>
-          <div class="col-lg-6" >
-            <mat-label class="f-w-600 m-b-8 d-block">Password</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" placeholder="your password" formControlName="password" />
-            </mat-form-field>
-          </div>
-          <div class="col-lg-6" ></div>
-
-          <div class="col-lg-6">
-            <mat-label class="f-w-600 m-b-8 d-block">帳號建立時間</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput placeholder="帳號建立時間" formControlName="createdAt" readonly="true" />
+              <input matInput placeholder="說明" formControlName="photo_desc" />
             </mat-form-field>
           </div>
 
           <div class="col-lg-6">
-            <mat-label class="f-w-600 m-b-8 d-block">帳號更新時間</mat-label>
+            <mat-label class="f-w-600 m-b-8 d-block">相簿排序</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput placeholder="帳號更新時間" formControlName="updatedAt" readonly="true" />
+              <input type="number" matInput placeholder="相簿排序" formControlName="photo_order" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">相簿影像</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input type="text" matInput placeholder="相簿影像" formControlName="defalut_photo_url" />
+            </mat-form-field>
+          </div>
+
+
+
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">更新時間</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="更新時間" formControlName="photo_updateAt" readonly="true" />
             </mat-form-field>
           </div>
 

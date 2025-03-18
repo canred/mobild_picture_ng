@@ -1,8 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { MaterialModule } from '../../material.module';
-import { User_Model } from 'src/app/models/user.model';
-import { Service_User } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Service_Album } from 'src/app/services/album.service';
+import { Album_Model } from 'src/app/models/album.model';
 
 interface Food {
   value: string;
@@ -17,13 +17,14 @@ interface Food {
 export class AppPhotoMamagementEditComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_user: Service_User, private fb: FormBuilder) {
+  constructor(private service_album: Service_Album, private fb: FormBuilder) {
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: [''],
-      email: ['', [Validators.email, Validators.required]],
-      createdAt: [''],
-      updatedAt: [''],
+      photo_name: ['', Validators.required],
+      photo_desc: [''],
+      photo_order: ['', [ Validators.required]],
+      photo_updateAt: [''],
+      defalut_photo_url: [''],
+      defalut_photo: [''],
       _id: [''],
     });
   }
@@ -40,14 +41,14 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
       }
       alert(`Invalid fields: ${invalidFields.join(', ')}`);
     }else{
-      const user: User_Model = this.form.value;
-      debugger;
-      this.service_user.update_user(user).subscribe(
+      const album: Album_Model = this.form.value;
+      this.service_album.update_album(album).subscribe(
         (response) => {
-          alert('User registered successfully');
+          alert('Update successfully');
+          window.history.back();
         },
         (error) => {
-          alert('Error registering user');
+          alert('Error');
         }
       );
     }
@@ -64,16 +65,16 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
   }
   async ngAfterViewInit(): Promise<void> {
     const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('_id');
-    if (userId) {
+    const albumId = urlParams.get('_id');
+    if (albumId) {
       try {
-        const user = await this.service_user.get_user_by_id(userId);
+        const user = await this.service_album.get_album_by_id(albumId);
         this.form.patchValue(user as any);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching album data:', error);
       }
     }else{
-      alert('User not found');
+      alert('Album not found');
     }
   }
 }
