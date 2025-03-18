@@ -82,6 +82,12 @@ export class Service_User {
     return this.http.delete(api_root); // 修正這行
   }
 
+
+  public delete_user_by_id(_id:string) {
+    let api_root = APP_CONFIG.API_ROOT + '/user/delete_by_id/' + _id;
+    return this.http.delete(api_root); // 修正這行
+  }
+
   public create_user(pUser: User_Model) {
     let api_root = APP_CONFIG.API_ROOT + '/user/register';
     return this.http.post(api_root, pUser); // 修正這行

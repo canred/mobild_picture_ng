@@ -7,23 +7,22 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="輸入關鍵字">
       </mat-form-field >
       <button mat-flat-button color="primary" class="p-y-0" style="margin-top:-20px;"  (click)="openDialog()">
-        新增使用者
+        新增相簿
       </button>
     </div>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource1" class="w-100">
         <!-- Position Column -->
-        <ng-container matColumnDef="username">
+        <ng-container matColumnDef="photo_name">
           <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14 p-l-0">
-            User Name
+            相簿的名稱
           </th>
           <td mat-cell *matCellDef="let element" class="p-l-0">
             <div class="d-flex align-items-center">
-              <!-- <img [src]="element.imagePath" alt="users" width="60" class="rounded" /> -->
               <div class="m-l-16">
                 <h6 class="f-s-14 f-w-600">
-                  {{ element.username }}
+                  {{ element.photo_name }}
                 </h6>
               </div>
             </div>
@@ -32,28 +31,41 @@
 
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="email">
+        <ng-container matColumnDef="photo_desc">
           <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
-            EMail
+            說明
           </th>
           <td mat-cell *matCellDef="let element">
 
             <span class=" rounded f-w-600 p-6 p-y-4 f-s-12">
-              {{ element.email }}
+              {{ element.photo_desc }}
+            </span>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="photo_order">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            排序
+          </th>
+          <td mat-cell *matCellDef="let element">
+
+            <span class=" rounded f-w-600 p-6 p-y-4 f-s-12">
+              {{ element.photo_order }}
             </span>
 
           </td>
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="updatedAt">
+        <ng-container matColumnDef="photo_updateAt">
           <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
             上次修改時間
           </th>
           <td mat-cell *matCellDef="let element">
 
             <span class=" rounded f-w-600 p-6 p-y-4 f-s-12">
-              {{ element.updatedAt }}
+              {{ element.photo_updateAt }}
             </span>
 
           </td>
@@ -73,7 +85,7 @@
               </button>
               <button mat-menu-item>
                 <mat-icon>delete</mat-icon>
-                <span>刪除</span>
+                <span>設定失效</span>
               </button>
             </mat-menu>
           </td>

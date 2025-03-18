@@ -71,7 +71,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>編輯</span>
               </a>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="deleteUser(element._id)">
                 <mat-icon>delete</mat-icon>
                 <span>刪除</span>
               </button>

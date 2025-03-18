@@ -9,8 +9,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { User_Model } from 'src/app/models/user.model';
 
-
-
 const USERS_DATA: User_Model[] = [];
 
 @Component({
@@ -29,45 +27,50 @@ const USERS_DATA: User_Model[] = [];
 })
 export class UserManmagementTableComponent implements AfterViewInit {
   public drs: User_Model[] | undefined = [];
-  constructor( private service_user:Service_User, private datePipe: DatePipe ) {}
-  // table 1
-  displayedColumns1: string[] = [ 'username', 'email', 'updatedAt','action'];
+  constructor(private service_user: Service_User, private datePipe: DatePipe) { }
+  displayedColumns1: string[] = ['username', 'email', 'updatedAt', 'action'];
   dataSource1 = USERS_DATA;
   openDialog() {
     alert('Dialog opened');
   }
   async applyFilter(event: Event) {
-    //  'http://localhost:3001/api/user/keyword/admin' \\
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.drs = await this.service_user.get_user_by_keyword(filterValue);
-    if(this.drs == undefined){
+    this.find_user_by_keyword((event.target as HTMLInputElement).value);
+  }
+
+  public async find_user_by_keyword(keyword: string) {
+    this.drs = await this.service_user.get_user_by_keyword(keyword);
+    if (this.drs == undefined) {
       // 表示沒有找到用戶
       this.drs = [];
-    }else{
+    } else {
       await this.drs.forEach((user) => {
-        if(user.updatedAt )
+        if (user.updatedAt)
           user.updatedAt = this.datePipe.transform(new Date(user.updatedAt!), 'yyyy-MM-dd HH:mm')!;
-        if(user.createdAt )
+        if (user.createdAt)
           user.createdAt = this.datePipe.transform(new Date(user.createdAt!), 'yyyy-MM-dd HH:mm')!;
+      });
+      this.drs.sort((a, b) => {
+        return a.username.localeCompare(b.username);
       });
       this.dataSource1 = this.drs;
     }
   }
 
   async ngAfterViewInit(): Promise<void> {
-    this.drs = await this.service_user.get_user_by_keyword('');
-    if(this.drs == undefined){
-      // 表示沒有找到用戶
-      this.drs = [];
-    }else{
-      await this.drs.forEach((user) => {
-        if(user.updatedAt )
-          user.updatedAt = this.datePipe.transform(new Date(user.updatedAt!), 'yyyy-MM-dd HH:mm')!;
-        if(user.createdAt )
-          user.createdAt = this.datePipe.transform(new Date(user.createdAt!), 'yyyy-MM-dd HH:mm')!;
-      });
-      this.dataSource1 = this.drs;
-    }
+    this.find_user_by_keyword('');
   }
 
+  deleteUser(user_id: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.service_user.delete_user_by_id(user_id).subscribe(
+        (response) => {
+          alert('User deleted successfully');
+          this.find_user_by_keyword('');
+        },
+        (error) => {
+          alert('Error deleting user');
+        }
+      );
+    }
+  }
 }

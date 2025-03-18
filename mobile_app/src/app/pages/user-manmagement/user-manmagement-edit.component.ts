@@ -72,6 +72,8 @@ export class AppUserMamagementEditComponent implements AfterViewInit {
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
+    }else{
+      alert('User not found');
     }
   }
 }
