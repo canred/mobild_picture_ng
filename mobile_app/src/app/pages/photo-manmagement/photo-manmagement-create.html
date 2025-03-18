@@ -1,0 +1,64 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>
+      <button mat-icon-button (click)="goBack()" class="p-t-2">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="m-l-12 m-b-12" style="font-size: x-large;">New Account Setting</div>
+
+    </mat-card-title>
+    <mat-card-content class="b-t-8">
+
+      <form class="p-t-12" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row m-t-12">
+          <div class="col-lg-6" style="display: none;">
+            <mat-label class="f-w-600 m-b-8 d-block">ID</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="_id" formControlName="_id" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">帳號名稱</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="User Name(必填)" formControlName="username"  />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Email</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="Email(必填)" formControlName="email" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6" >
+            <mat-label class="f-w-600 m-b-8 d-block">Password</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" placeholder="your password" formControlName="password" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6" ></div>
+
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">帳號建立時間</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="帳號建立時間" formControlName="createdAt" readonly="true" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">帳號更新時間</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput placeholder="帳號更新時間" formControlName="updatedAt" readonly="true" />
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="m-t-12" style="text-align: center;">
+          <button mat-flat-button color="primary" class="m-r-8">Save</button>
+          <button mat-stroked-button color="warn" (click)="goBack();">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
