@@ -3,6 +3,7 @@ import { MaterialModule } from '../../material.module';
 import { User_Model } from 'src/app/models/user.model';
 import { Service_User } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 interface Food {
   value: string;
@@ -17,7 +18,7 @@ interface Food {
 export class AppUserMamagementEditComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_user: Service_User, private fb: FormBuilder) {
+  constructor(private service_user: Service_User, private fb: FormBuilder,private toastr: ToastrService) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: [''],
@@ -38,16 +39,16 @@ export class AppUserMamagementEditComponent implements AfterViewInit {
           invalidFields.push(control);
         }
       }
-      alert(`Invalid fields: ${invalidFields.join(', ')}`);
+      this.toastr.error('Invalid fields: ' + invalidFields.join(', '));
     }else{
       const user: User_Model = this.form.value;
       debugger;
       this.service_user.update_user(user).subscribe(
         (response) => {
-          alert('User registered successfully');
+          this.toastr.success('User updated successfully');
         },
         (error) => {
-          alert('Error registering user');
+          this.toastr.error('Error updating user');
         }
       );
     }
@@ -73,7 +74,7 @@ export class AppUserMamagementEditComponent implements AfterViewInit {
         console.error('Error fetching user data:', error);
       }
     }else{
-      alert('User not found');
+      this.toastr.warning('User not found');
     }
   }
 }

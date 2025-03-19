@@ -5,17 +5,20 @@
   <mat-card-content>
     <mat-card-title>相簿管理</mat-card-title>
     <mat-card-subtitle>(系統 管理人員權限控制)</mat-card-subtitle>
-    <!-- 新增的標籤頁開始 -->
-    <mat-tab-group class="custom-tab-group">
-      <mat-tab label="相簿管理">
-        <!-- <p>使用者維護內容</p> -->
+
+
+    <mat-tab-group #tabGroup class="custom-tab-group" [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged($event);">
+
+      <mat-tab label="相簿管理" >
         <app-photo-manmagement-table></app-photo-manmagement-table>
       </mat-tab>
 
       <mat-tab label="磁碟空間監控">
-        <!-- <p>使用者維護內容</p> -->
-        <app-photo-manmagement-table></app-photo-manmagement-table>
+        <div class="m-t-12" style="display: flex;display:flex;justify-content: center;align-items: center;">
+          <div style="height: 600px;width: 100%;" #echarts  ></div>
+        </div>
       </mat-tab>
+
 
     </mat-tab-group>
     <!-- 新增的標籤頁結束 -->

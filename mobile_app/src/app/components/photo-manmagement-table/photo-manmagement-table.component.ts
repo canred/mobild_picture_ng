@@ -9,8 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { Album_Model } from 'src/app/models/album.model';
 import { Service_Album } from 'src/app/services/album.service';
 import { ToastrService } from 'ngx-toastr';
-
-
+import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
+// import echarts core
+import * as echarts from 'echarts/core';
+// import necessary echarts components
+import { BarChart } from 'echarts/charts';
+import { GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { NgxEchartsModule } from 'ngx-echarts';
+echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
 const drs_album: Album_Model[] = [];
 
@@ -24,8 +31,11 @@ const drs_album: Album_Model[] = [];
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    NgxEchartsDirective
   ],
-  providers: [DatePipe,],
+  providers: [DatePipe,
+    //provideEchartsCore(echarts)
+  ],
   templateUrl: './photo-manmagement-table.html',
 })
 export class PhotoManmagementTableComponent {

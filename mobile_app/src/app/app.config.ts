@@ -29,10 +29,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
+import * as echarts from 'echarts/core';
+import { BarChart } from 'echarts/charts';
+import { GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideToastr(),
     provideToastr(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
@@ -46,12 +54,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideEchartsCore({echarts}),
     importProvidersFrom(
       FormsModule,
       ReactiveFormsModule,
       MaterialModule,
       TablerIconsModule.pick(TablerIcons),
       NgScrollbarModule,
+      CommonModule,NgxEchartsModule
     ),
   ],
 };

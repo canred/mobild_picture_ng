@@ -3,6 +3,7 @@ import { MaterialModule } from '../../material.module';
 import { User_Model } from 'src/app/models/user.model';
 import { Service_User } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 interface Food {
   value: string;
@@ -17,7 +18,7 @@ interface Food {
 export class AppUserMamagementCreateComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_user: Service_User, private fb: FormBuilder) {
+  constructor(private service_user: Service_User, private fb: FormBuilder,private toastr: ToastrService) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -38,16 +39,16 @@ export class AppUserMamagementCreateComponent implements AfterViewInit {
           invalidFields.push(control);
         }
       }
-      alert(`Invalid fields: ${invalidFields.join(', ')}`);
+      this.toastr.error('Invalid fields: ' + invalidFields.join(', '));
     }else{
       const user: User_Model = this.form.value;
       debugger;
       this.service_user.create_user(user).subscribe(
         (response) => {
-          alert('User registered successfully');
+          this.toastr.success('User registered successfully');
         },
         (error) => {
-          alert('Error registering user');
+          this.toastr.error('Error registering user');
         }
       );
     }
