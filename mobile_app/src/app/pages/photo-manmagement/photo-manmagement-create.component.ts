@@ -3,6 +3,9 @@ import { MaterialModule } from '../../material.module';
 import { Album_Model } from 'src/app/models/album.model';
 import { Service_Album } from 'src/app/services/album.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 interface Food {
   value: string;
@@ -17,13 +20,13 @@ interface Food {
 export class AppphotoMamagementCreateComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_album: Service_Album, private fb: FormBuilder) {
+  constructor(private service_album: Service_Album, private fb: FormBuilder,private toastr: ToastrService) {
     this.form = this.fb.group({
       photo_name: ['', Validators.required],
       photo_desc: [''],
       photo_order: ['', [ Validators.required]],
       photo_updateAt: [''],
-      defalut_photo: [''],
+      defalut_photo_url: [''],
       _id: [''],
     });
   }
@@ -41,11 +44,13 @@ export class AppphotoMamagementCreateComponent implements AfterViewInit {
       const album: Album_Model = this.form.value;
       this.service_album.create_album(album).subscribe(
         (response) => {
-          alert('Create Album successfully');
-          this.goBack();
+          this.toastr.success('Create Album successfully(2秒後返回)');
+          of(null).pipe(delay(2000)).subscribe(() => {
+            this.goBack();
+          });
         },
         (error) => {
-          alert('Error in Create Album');
+          this.toastr.error('Error in Create Album');
         }
       );
     }
@@ -61,16 +66,7 @@ export class AppphotoMamagementCreateComponent implements AfterViewInit {
 
   }
   async ngAfterViewInit(): Promise<void> {
-    // const urlParams = new URLSearchParams(window.location.search);
-    // const userId = urlParams.get('_id');
-    // if (userId) {
-    //   try {
-    //     const user = await this.service_user.get_user_by_id(userId);
-    //     this.form.patchValue(user as any);
-    //   } catch (error) {
-    //     console.error('Error fetching user data:', error);
-    //   }
-    // }
+
   }
 }
 

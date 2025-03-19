@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.scss",
               "src/assets/scss/style.scss",
-              "src/assets/scss/style.css"
+              "src/assets/scss/style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "browser": "src/main.ts"

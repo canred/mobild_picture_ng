@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Album_Model } from 'src/app/models/album.model';
 import { Service_Album } from 'src/app/services/album.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -24,18 +25,16 @@ const drs_album: Album_Model[] = [];
     MatMenuModule,
     MatButtonModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,],
   templateUrl: './photo-manmagement-table.html',
 })
 export class PhotoManmagementTableComponent {
   public drs: Album_Model[] | undefined = [];
-    constructor(private service_album: Service_Album, private datePipe: DatePipe) { }
+    constructor(private service_album: Service_Album, private datePipe: DatePipe,private toastr: ToastrService) { }
 
   displayedColumns1: string[] = [ 'photo_name', 'photo_desc', 'photo_order','photo_updateAt','action'];
   dataSource1 = drs_album;
-  openDialog() {
-    alert('Dialog opened');
-  }
+
   async applyFilter(event: Event) {
     this.find_user_by_keyword((event.target as HTMLInputElement).value);
   }
@@ -66,13 +65,14 @@ export class PhotoManmagementTableComponent {
     if (confirm('Are you sure you want to delete this album?')) {
       this.service_album.delete_album_by_id(album_id).subscribe(
         (response) => {
-          alert('User deleted successfully');
+          this.toastr.success('Album deleted successfully');
           this.find_user_by_keyword('');
         },
         (error) => {
-          alert('Error deleting user');
+          this.toastr.error('Error deleting user');
         }
       );
     }
   }
+
 }

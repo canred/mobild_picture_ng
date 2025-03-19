@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { User_Model } from 'src/app/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 const USERS_DATA: User_Model[] = [];
 
@@ -27,12 +28,10 @@ const USERS_DATA: User_Model[] = [];
 })
 export class UserManmagementTableComponent implements AfterViewInit {
   public drs: User_Model[] | undefined = [];
-  constructor(private service_user: Service_User, private datePipe: DatePipe) { }
+  constructor(private service_user: Service_User, private datePipe: DatePipe,private toastr: ToastrService) { }
   displayedColumns1: string[] = ['username', 'email', 'updatedAt', 'action'];
   dataSource1 = USERS_DATA;
-  openDialog() {
-    alert('Dialog opened');
-  }
+
   async applyFilter(event: Event) {
     this.find_user_by_keyword((event.target as HTMLInputElement).value);
   }
@@ -64,11 +63,11 @@ export class UserManmagementTableComponent implements AfterViewInit {
     if (confirm('Are you sure you want to delete this user?')) {
       this.service_user.delete_user_by_id(user_id).subscribe(
         (response) => {
-          alert('User deleted successfully');
+          this.toastr.success('User deleted successfully');
           this.find_user_by_keyword('');
         },
         (error) => {
-          alert('Error deleting user');
+          this.toastr.error('Error deleting user');
         }
       );
     }

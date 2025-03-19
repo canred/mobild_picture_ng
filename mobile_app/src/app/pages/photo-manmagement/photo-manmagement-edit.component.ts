@@ -3,6 +3,7 @@ import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Service_Album } from 'src/app/services/album.service';
 import { Album_Model } from 'src/app/models/album.model';
+import { ToastrService } from 'ngx-toastr';
 
 interface Food {
   value: string;
@@ -17,7 +18,7 @@ interface Food {
 export class AppPhotoMamagementEditComponent implements AfterViewInit {
 
   public form: FormGroup;
-  constructor(private service_album: Service_Album, private fb: FormBuilder) {
+  constructor(private service_album: Service_Album, private fb: FormBuilder,private toastr: ToastrService) {
     this.form = this.fb.group({
       photo_name: ['', Validators.required],
       photo_desc: [''],
@@ -39,16 +40,16 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
           invalidFields.push(control);
         }
       }
-      alert(`Invalid fields: ${invalidFields.join(', ')}`);
+      this.toastr.error(`Invalid fields: ${invalidFields.join(', ')}`);
     }else{
       const album: Album_Model = this.form.value;
       this.service_album.update_album(album).subscribe(
         (response) => {
-          alert('Update successfully');
+          this.toastr.success('Update Album successfully');
           window.history.back();
         },
         (error) => {
-          alert('Error');
+          this.toastr.error('Error in Update Album');
         }
       );
     }
@@ -63,6 +64,7 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
   public onCancel() {
 
   }
+
   async ngAfterViewInit(): Promise<void> {
     const urlParams = new URLSearchParams(window.location.search);
     const albumId = urlParams.get('_id');
@@ -71,10 +73,10 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
         const user = await this.service_album.get_album_by_id(albumId);
         this.form.patchValue(user as any);
       } catch (error) {
-        console.error('Error fetching album data:', error);
+        this.toastr.error('Error fetching album data');
       }
     }else{
-      alert('Album not found');
+      this.toastr.warning('Album not found');
     }
   }
 }
