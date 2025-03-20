@@ -1,3 +1,4 @@
+import { Service_System } from './../../services/system.service';
 import { AfterViewInit, Component, ElementRef, ViewChild, viewChild, viewChildren } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { User_Model } from 'src/app/models/user.model';
@@ -20,7 +21,8 @@ export class AppPhotoMamagementComponent implements AfterViewInit {
   @ViewChild("echarts", { static: true }) chart!: ElementRef<HTMLDivElement>;
 
   private chartOne : ECharts;
-  chartOption: EChartsOption = {
+
+  chartOption: any = {
     title: {
       text: '存儲使用空間',
       left: 'center',
@@ -37,50 +39,9 @@ export class AppPhotoMamagementComponent implements AfterViewInit {
         color: '#fff'
       }
     },
-    series: [
-      {
-        name: '磁碟使用率',
-        type: 'gauge',
-        axisLine: {
-          lineStyle: {
-            color: [[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']],
-            width: 15
-          }
-        },
-        axisLabel: {
-          color: '#333',
-          fontSize: 12
-        },
-        axisTick: {
-          length: 12,
-          lineStyle: {
-            color: 'auto'
-          }
-        },
-        splitLine: {
-          length: 20,
-          lineStyle: {
-            color: 'auto'
-          }
-        },
-        pointer: {
-          width: 5
-        },
-        title: {
-          offsetCenter: [0, '-30%'],
-          fontSize: 14,
-          color: '#333'
-        },
-        detail: {
-          formatter: '{value}%',
-          fontSize: 20,
-          color: '#333'
-        },
-        data: [{ value: 50, name: '使用率' }]
-      }
-    ]
+    series: []
   };
-  constructor(private toastr: ToastrService) {
+  constructor(private toastr: ToastrService,private service_System:Service_System) {
   }
 
   public selectedTabIndex : number = 0;
@@ -88,11 +49,58 @@ export class AppPhotoMamagementComponent implements AfterViewInit {
 
   }
 
-  onTabChanged(event: any) {
+  async onTabChanged(event: any) {
     if(this.selectedTabIndex==1){
       if(this.chartOne==undefined){
         this.chartOne = echartsInit(this.chart.nativeElement);
       }
+
+      let d = await this.service_System.get_disk_info();
+      this.chartOption.series = [];
+      d?.forEach((disk) => {
+
+        this.chartOption.series.push({
+          name: '磁碟使用率',
+          type: 'gauge',
+          axisLine: {
+            lineStyle: {
+              color: [[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']],
+              width: 15
+            }
+          },
+          axisLabel: {
+            color: '#333',
+            fontSize: 12
+          },
+          axisTick: {
+            length: 12,
+            lineStyle: {
+              color: 'auto'
+            }
+          },
+          splitLine: {
+            length: 20,
+            lineStyle: {
+              color: 'auto'
+            }
+          },
+          pointer: {
+            width: 5
+          },
+          title: {
+            offsetCenter: [0, '-200%'],
+            fontSize: 14,
+            color: '#FFF'
+          },
+          detail: {
+            formatter: '{value}%',
+            offsetCenter: [0, '-200%'],
+            fontSize: 20,
+            color: '#333'
+          },
+          data: [{ value: parseInt( disk.usageRate), name: disk.disk_name+'使用率' }]
+        });
+      });
       this.chartOne.setOption(this.chartOption);
     }
   }
