@@ -79,7 +79,8 @@
         - ![image](https://github.com/user-attachments/assets/d994950e-97f0-4093-999d-d4f373f1addc)
         - ![image](https://github.com/user-attachments/assets/ce57e965-c583-499d-af86-7e844c245542)
       - 磁碟空間顯示
-        - ![image](https://github.com/user-attachments/assets/a0585e26-5c27-4aa2-9998-436ffe666998)
+        - ![image](https://github.com/user-attachments/assets/a95b1663-7b30-4953-8849-d49488837b49)
+
 
 
 
