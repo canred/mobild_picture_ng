@@ -52,7 +52,7 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding()
     ),
     provideHttpClient(withInterceptorsFromDi()),
-    provideClientHydration(),
+    //provideClientHydration(),
     provideAnimationsAsync(),
     provideEchartsCore({echarts}),
     importProvidersFrom(

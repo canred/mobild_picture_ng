@@ -8,12 +8,14 @@ import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { provideClientHydration } from '@angular/platform-browser';
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 
 @Component({
     selector: 'app-root',
     imports: [RouterOutlet],
     templateUrl: './app.component.html',
+    
     //providers: [provideEchartsCore(echarts)],
 })
 export class AppComponent {

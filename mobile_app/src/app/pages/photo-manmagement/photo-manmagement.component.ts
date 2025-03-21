@@ -1,5 +1,5 @@
 import { Service_System } from './../../services/system.service';
-import { AfterViewInit, Component, ElementRef, ViewChild, viewChild, viewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, viewChild, viewChildren } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { User_Model } from 'src/app/models/user.model';
 import { PhotoManmagementTableComponent } from 'src/app/components/photo-manmagement-table/photo-manmagement-table.component';
@@ -7,21 +7,23 @@ import { ToastrService } from 'ngx-toastr';
 import { EChartsCoreOption } from 'echarts/core';
 import { EChartsOption } from 'echarts/types/dist/shared';
 import { NgxEchartsDirective, NgxEchartsModule } from 'ngx-echarts';
-import { ECharts , init as echartsInit } from 'echarts';
+import { ECharts, init as echartsInit } from 'echarts';
 
 @Component({
   selector: 'app-photo-manmagement',
-  imports: [MaterialModule,PhotoManmagementTableComponent,NgxEchartsModule],
+  imports: [MaterialModule, PhotoManmagementTableComponent, NgxEchartsModule],
   templateUrl: './photo-manmagement.html',
 })
 
-export class AppPhotoMamagementComponent implements AfterViewInit {
-
-
+export class AppPhotoMamagementComponent implements AfterViewInit  , OnInit{
   @ViewChild("echarts", { static: true }) chart!: ElementRef<HTMLDivElement>;
 
-  private chartOne : ECharts;
+  ngOnInit(): void {
+    // 手動觸發變更檢測
+    this.cdr.detectChanges();
+  }
 
+  private chartOne: ECharts;
   chartOption: any = {
     title: {
       text: '存儲使用空間',
@@ -41,24 +43,22 @@ export class AppPhotoMamagementComponent implements AfterViewInit {
     },
     series: []
   };
-  constructor(private toastr: ToastrService,private service_System:Service_System) {
+  constructor(private toastr: ToastrService, private service_System: Service_System,private cdr: ChangeDetectorRef) {
   }
 
-  public selectedTabIndex : number = 0;
+  public selectedTabIndex: number = 0;
   async ngAfterViewInit(): Promise<void> {
 
   }
 
   async onTabChanged(event: any) {
-    if(this.selectedTabIndex==1){
-      if(this.chartOne==undefined){
+    if (this.selectedTabIndex == 1) {
+      if (this.chartOne == undefined) {
         this.chartOne = echartsInit(this.chart.nativeElement);
       }
-
       let d = await this.service_System.get_disk_info();
       this.chartOption.series = [];
       d?.forEach((disk) => {
-
         this.chartOption.series.push({
           name: '磁碟使用率',
           type: 'gauge',
@@ -98,12 +98,12 @@ export class AppPhotoMamagementComponent implements AfterViewInit {
             fontSize: 20,
             color: '#333'
           },
-          data: [{ value: parseInt( disk.usageRate), name: disk.disk_name+'使用率' }]
+          data: [{ value: parseInt(disk.usageRate), name: disk.disk_name + '使用率' }]
         });
       });
       this.chartOne.setOption(this.chartOption);
     }
   }
- }
+}
 
 

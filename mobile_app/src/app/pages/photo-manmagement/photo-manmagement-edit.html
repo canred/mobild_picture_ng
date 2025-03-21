@@ -41,11 +41,16 @@
           </div>
 
           <div class="col-lg-6">
-            <mat-label class="f-w-600 m-b-8 d-block">相簿影像</mat-label>
+            <mat-label class="f-w-600 m-b-8 d-block">相簿影像1</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input type="text" matInput placeholder="相簿影像" formControlName="defalut_photo_url" />
+              <app-file-upload formControlName="defalut_photo_url" ></app-file-upload>
             </mat-form-field>
           </div>
+
+         
+          
+
 
           <div class="col-lg-6">
             <mat-label class="f-w-600 m-b-8 d-block">更新時間</mat-label>
@@ -64,3 +69,5 @@
     </mat-card-content>
   </mat-card-content>
 </mat-card>
+
+

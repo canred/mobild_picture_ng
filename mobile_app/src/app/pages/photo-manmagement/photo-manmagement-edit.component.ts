@@ -1,9 +1,10 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Service_Album } from 'src/app/services/album.service';
 import { Album_Model } from 'src/app/models/album.model';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploadComponent } from "../../components/file-upload/file-upload.component";
 
 interface Food {
   value: string;
@@ -11,14 +12,19 @@ interface Food {
 }
 @Component({
   selector: 'app-photo-manmagement-edit',
-  imports: [MaterialModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule, FileUploadComponent],
   templateUrl: './photo-manmagement-edit.html',
 })
 
-export class AppPhotoMamagementEditComponent implements AfterViewInit {
-
+export class AppPhotoMamagementEditComponent implements AfterViewInit , OnInit {
+  public photo_url:any;
   public form: FormGroup;
-  constructor(private service_album: Service_Album, private fb: FormBuilder,private toastr: ToastrService) {
+  ngOnInit(): void {
+    // 手動觸發變更檢測
+    this.cdr.detectChanges();
+  }
+  defalut_photo_url2: string|number|null;
+  constructor(private service_album: Service_Album, private fb: FormBuilder,private toastr: ToastrService,private cdr: ChangeDetectorRef) {
     this.form = this.fb.group({
       photo_name: ['', Validators.required],
       photo_desc: [''],
@@ -72,6 +78,7 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit {
       try {
         const user = await this.service_album.get_album_by_id(albumId);
         this.form.patchValue(user as any);
+        
       } catch (error) {
         this.toastr.error('Error fetching album data');
       }

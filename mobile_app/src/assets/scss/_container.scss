@@ -3,12 +3,13 @@
 *,
 :after,
 :before {
-  box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
+
 
 body {
   font-family: $font-family;
@@ -204,4 +205,42 @@ td.hljs-ln-line.hljs-ln-numbers {
 .list-unstyled {
   padding-left: 0;
   list-style: none;
+}
+
+
+
+::-webkit-scrollbar {
+
+  width: 0px;
+
+}
+
+::-webkit-scrollbar-button {
+
+  background: transparent;
+
+  border-radius: 4px;
+
+}
+
+::-webkit-scrollbar-track-piece {
+
+  background: transparent;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  border-radius: 4px;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  border: 1px solid slategrey;
+
+}
+
+::-webkit-scrollbar-track {
+
+  box-shadow: transparent;
+
 }
