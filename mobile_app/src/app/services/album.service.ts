@@ -2,7 +2,7 @@ import { getLocaleCurrencyCode } from '@angular/common';
 import { Injectable, signal } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { APP_CONFIG } from '../app-config';
-import { HttpClient } from '@angular/common/http'; // 新增這行
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // 修改這行
 import { User_Model } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { Album_Model } from '../models/album.model';
@@ -47,13 +47,24 @@ export class Service_Album {
    * 更新相簿信息，通過向服務器發送POST請求。
    *
    * @param {Album_Model} pAlbum - 包含更新後相簿信息的相簿模型。
+   * @param {File} file - 包含相簿圖片的文件。
    * @returns {Observable<any>} 包含服務器響應的可觀察對象。
    */
-  public update_album(pAlbum: Album_Model) {
+  public update_album(pAlbum: Album_Model, file: File) {
+    debugger;
     let api_root = APP_CONFIG.API_ROOT + '/album/edit';
-    return this.http.put(api_root, pAlbum); // 修正這行
-  }
+    const formData: FormData = new FormData();
+    formData.append('_id', pAlbum._id!.toString());
+    formData.append('photo_name', pAlbum.photo_name);
+    formData.append('photo_desc', pAlbum.photo_desc!.toString());
+    formData.append('photo_order', pAlbum.photo_order.toString());
+    formData.append('file', file, file.name);
 
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+
+    return this.http.put(api_root, formData, { headers: headers }); // 修正這行
+  }
 
   public delete_album_by_id(_id:string) {
     let api_root = APP_CONFIG.API_ROOT + '/album/delete_by_id/' + _id;

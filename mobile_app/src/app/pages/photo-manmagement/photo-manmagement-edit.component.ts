@@ -33,12 +33,20 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit , OnInit {
       defalut_photo_url: [''],
       defalut_photo: [''],
       _id: [''],
+      file:[null]
     });
   }
 
-  onSubmit(){
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.patchValue({
+        file: file
+      });
+    }
+  }
 
-
+  onSubmit() {
     if (!this.form.valid) {
       const invalidFields = [];
       for (const control in this.form.controls) {
@@ -47,9 +55,11 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit , OnInit {
         }
       }
       this.toastr.error(`Invalid fields: ${invalidFields.join(', ')}`);
-    }else{
+    } else {
       const album: Album_Model = this.form.value;
-      this.service_album.update_album(album).subscribe(
+      debugger;
+      const file: File = this.form.get('file')!.value;
+      this.service_album.update_album(album, file).subscribe(
         (response) => {
           this.toastr.success('Update Album successfully');
           window.history.back();
@@ -59,8 +69,6 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit , OnInit {
         }
       );
     }
-
-
   }
 
   goBack() {
