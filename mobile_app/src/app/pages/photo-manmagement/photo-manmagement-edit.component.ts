@@ -21,7 +21,9 @@ export class AppPhotoMamagementEditComponent implements AfterViewInit , OnInit {
   public form: FormGroup;
   ngOnInit(): void {
     // 手動觸發變更檢測
-    this.cdr.detectChanges();
+    try{
+      this.cdr.detectChanges();
+    }catch(e){}
   }
   defalut_photo_url2: string|number|null;
   constructor(private service_album: Service_Album, private fb: FormBuilder,private toastr: ToastrService,private cdr: ChangeDetectorRef) {

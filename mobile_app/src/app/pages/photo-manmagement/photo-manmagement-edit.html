@@ -36,8 +36,9 @@
           <div class="col-lg-6">
             <mat-label class="f-w-600 m-b-8 d-block">相簿影像1</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input type="text" matInput placeholder="相簿影像" formControlName="file" />
-              <app-file-upload formControlName="file"></app-file-upload>
+              <input type="text" matInput placeholder="相簿影像" />
+              <img [src]="form.get('album_file_url')?.value || ''" alt="相簿影像" style="width: 100%;" />
+              <!--app-file-upload formControlName="file"></app-file-upload-->
               <input type="file" (change)="onFileChange($event)" />
             </mat-form-field>
           </div>
